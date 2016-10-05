@@ -2,13 +2,26 @@
 
 """This is the base file for my chatbot/personal assistant"""
 
-user_string = ''
-EXIT_STRINGS = ['exit', 'goodbye', 'good bye', 'bye', 'see you', 'see ya']
+from response_builder import respond
 
-print("Hi! I'm Zura.\nCan I help you with something? Or maybe you just want to talk?")
 
-while (True and user_string.lower() not in EXIT_STRINGS):
-    user_string = input()
-    print("User string gotten!")
+def _main():
+  """Sets up and starts the conversation loop"""
+  # Setup
+  user_string = ''
+  should_exit = False
 
-print("Alright, see you later!")
+  # Print start text
+  print("Hi! I'm Zura.")
+  print("Can I help you with something? Or maybe you just want to talk?")
+
+  # Begin conversation loop
+  while (True and not should_exit):
+    user_string = input().lower()
+    should_exit = respond(user_string)
+    if should_exit:
+      break
+
+
+if __name__ == "__main__":
+  _main()
